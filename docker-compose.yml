@@ -9,7 +9,7 @@ networks:
 services:
 
   nginx:
-    container_name: dev-nginx
+    container_name: ${ENV}-nginx
     build:
       context: ./nginx
     ports:
@@ -20,12 +20,16 @@ services:
       - ${PWD}/nginx/conf.d:/etc/nginx/conf.d
       - ${PWD}/nginx/ssl:/etc/nginx/ssl
       - ${WEB_ROOT_PATH}:/var/www/site
+    restart: always
     depends_on:
       - php-fpm
       - mysql
+    networks:
+      - frontend
+      - backend
 
   php-fpm:
-    container_name: dev-php-pfm
+    container_name: ${ENV}-php-pfm
     build:
       context: ./php-fpm
       args:
@@ -50,9 +54,11 @@ services:
       - ${PWD}/php-fpm/conf-${PHP_VERSION}/php-fpm.conf:/usr/local/etc/php-fpm.conf
       - ${PWD}/php-fpm/conf-${PHP_VERSION}/php-fpm.d:/usr/local/etc/php-fpm.d
       - ${WEB_ROOT_PATH}:/var/www/site
+    networks:
+      - backend
 
   mysql:
-    container_name: dev-mysql
+    container_name: ${ENV}-mysql
     build:
       context: ./mysql
       args:
@@ -67,9 +73,11 @@ services:
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    networks:
+      - backend
 
   mongo:
-    container_name: dev-mongo
+    container_name: ${ENV}-mongo
     build:
       context: ./mongo
       args:
@@ -90,9 +98,11 @@ services:
       interval: 2m
       timeout: 10s
       retries: 3
+    networks:
+      - backend
 
   yapi:
-    container_name: dev-yapi
+    container_name: ${ENV}-yapi
     build:
       context: ./yapi
       dockerfile: Dockerfile
@@ -108,12 +118,6 @@ services:
       - 3000:3000
     depends_on: 
       - mongo
-
-  notes-api:
-    build:
-      context: ./notes-api-gin
-      dockerfile: Dockerfile
-    ports:
-      - 8000:8000
     networks:
-      - my-bridge
+      - frontend
+      - backend
