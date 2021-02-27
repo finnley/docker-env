@@ -123,8 +123,11 @@ services:
       - backend
 
   golang:
+    container_name: ${ENV}-golang
     build:
       context: ./golang
+      args:
+        - GO_VERSION=${GO_VERSION}
     ports:
       - 8000:8080
       - 8088:8088
