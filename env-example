@@ -78,8 +78,8 @@ MONGO_INITDB_DATABASE=yapi
 ### Redis ###########################################
 
 # https://hub.docker.com/_/redis
-# support 5.0 - 4.0
-REDIS_VERSION=5.0
+# support 6.2.0 - 5.0 - 4.0
+REDIS_VERSION=6.2.0
 REDIS_PORT=6379
 
 

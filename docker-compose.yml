@@ -76,6 +76,25 @@ services:
     networks:
       - backend
 
+  redis:
+    container_name: ${ENV}-redis
+    build:
+      context: ./redis
+      args:
+        - REDIS_VERSION=${REDIS_VERSION}
+    ports:
+      - ${REDIS_PORT}:6379
+    volumes:
+      - ${PWD}/redis/data:/data
+      - ${PWD}/redis/conf:/usr/local/etc/redis
+    restart: always
+    # environment:
+    #   # 设置环境变量 时区上海 编码UTF-8
+    #   TZ: Asia/Shanghai
+    #   LANG: en_US.UTF-8
+    networks:
+      - backend
+
   mongo:
     container_name: ${ENV}-mongo
     build:
