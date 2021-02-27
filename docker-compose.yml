@@ -154,7 +154,7 @@ services:
       - mysql
       - redis
     volumes:
-      - $HOME/Code:/go
+      - $HOME/Code:/go/src
     tty: true   
     networks:
       - backend
