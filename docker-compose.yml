@@ -122,11 +122,27 @@ services:
       - frontend
       - backend
 
+  golang:
+    build:
+      context: ./golang
+    ports:
+      - 8000:8080
+      - 8088:8088
+    depends_on:
+      - mysql
+      - redis
+    volumes:
+      - $HOME/Code:/go
+    tty: true   
+    networks:
+      - backend
+
   consul:
     container_name: ${ENV}-consul
     build:
       context: ./consul
-      dockerfile: Dockerfile
+      args:
+        - CONSUL_VERSION=${CONSUL_VERSION}
     ports:
       - 8300:8300
       - 8500:8500
@@ -140,4 +156,4 @@ services:
       - ${PWD}/consul/data:/consul/data
       - ${PWD}/consul/config:/consul/config
     restart: always
-    command: agent -server -client=0.0.0.0
+    command: agent -dev -client=0.0.0.0
