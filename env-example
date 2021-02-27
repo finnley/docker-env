@@ -89,3 +89,9 @@ REDIS_PORT=6379
 # support 1.5.16 - 1.5 - 1
 MEMCACHED_VERSION=1.5.16
 MEMCACHED_PORT=11211
+
+### Consul ###########################################
+
+# https://hub.docker.com/_/consul
+# support latest
+CONSUL_VERSION=latest
