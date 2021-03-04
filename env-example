@@ -12,8 +12,7 @@ NETWORKS_DRIVER=bridge
 
 ### Paths #################################################
 
-WEB_ROOT_PATH=/var/www/site
-
+WEB_ROOT_PATH=../
 
 ### PHP Version ###########################################
 
@@ -78,8 +77,8 @@ MONGO_INITDB_DATABASE=yapi
 ### Redis ###########################################
 
 # https://hub.docker.com/_/redis
-# support 5.0 - 4.0
-REDIS_VERSION=5.0
+# support 6.2.0 - 5.0 - 4.0
+REDIS_VERSION=6.2.0
 REDIS_PORT=6379
 
 
@@ -89,3 +88,16 @@ REDIS_PORT=6379
 # support 1.5.16 - 1.5 - 1
 MEMCACHED_VERSION=1.5.16
 MEMCACHED_PORT=11211
+
+
+### Consul ##########################################
+
+# https://hub.docker.com/_/consul
+# support latest
+CONSUL_VERSION=latest
+
+### Golang ##########################################
+
+# https://hub.docker.com/_/golang
+# support latest
+GO_VERSION=latest
