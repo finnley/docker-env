@@ -130,6 +130,15 @@ RUN if [ ${INSTALL_SWOOLE} = true ]; then \
     && docker-php-ext-enable swoole \
 ;fi
 
+# PECL Extensions yaf:
+ARG INSTALL_YAF=false
+ARG INSTALL_YAF_VERSION
+RUN if [ ${INSTALL_YAF} = true ]; then \
+    pecl install yaf-${INSTALL_YAF_VERSION} \
+    && rm -rf /tmp/pear \
+    && docker-php-ext-enable yaf \
+;fi
+
 
 ###########################################################################
 # PHP Thrid Extensions:
