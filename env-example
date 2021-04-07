@@ -12,6 +12,7 @@ NETWORKS_DRIVER=bridge
 
 ### Paths #################################################
 
+# WEB_ROOT_PATH=./www
 WEB_ROOT_PATH=../Code
 
 ### PHP Version ###########################################
