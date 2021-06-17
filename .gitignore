@@ -3,3 +3,5 @@
 .DS_Store
 
 .env
+
+/mongo/mongo-conf/init-yapi-mongo.js
